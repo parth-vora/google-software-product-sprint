@@ -25,25 +25,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+@WebServlet("/text")
 public class DataServlet extends HttpServlet {
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  //public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
-  
+    //response.setContentType("text/html;");
+    //response.getWriter().println("Hello Parth!");
+
+    //response.setContentType("application/json;");
+    //response.getWriter().println(json);
     
-    ArrayList<String> testStrings = new ArrayList(Arrays.asList("Hello, World!", "This is Parth!", "This is a message using JSON","Google SPS 2020"));
+  //} 
+
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String text = getParameter(request, "text-input", "");
+    boolean upperCase = Boolean.parseBoolean(getParameter(request, "upper-case", "false"));
+    boolean sort = Boolean.parseBoolean(getParameter(request, "sort", "false"));
+
+    // Convert the text to upper case.
+    if (upperCase) {
+      text = text.toUpperCase();
+    }
+
+    // Break the text into individual words.
+    String[] words = text.split("\\s*,\\s*");
+
+    // Sort the words.
+    if (sort) {
+      Arrays.sort(words);
+    }
+
+    // Respond with the result.
     response.setContentType("text/html;");
-    response.getWriter().println("Hello Parth!");
-    String json = convertToJson(testStrings);
+    response.getWriter().println(Arrays.toString(words));
+  }
 
 
-    response.setContentType("application/json;");
-    response.getWriter().println(json);
-    
-  } 
-
+    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+  
     private String convertToJson(ArrayList hello) {
     String json = "{";
     json += "\"firstWord\": ";
