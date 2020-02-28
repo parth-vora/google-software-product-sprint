@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,6 +64,21 @@ public class DataServlet extends HttpServlet {
     // Respond with the result.
     response.setContentType("text/html;");
     response.getWriter().println(Arrays.toString(words));
+
+    String input = request.getParameter("text-input");
+    String upper = request.getParameter("upper-case");
+    String sortInput = request.getParameter("sort");
+
+
+    Entity taskEntity = new Entity("Task");
+    taskEntity.setProperty("text-input", input);
+    taskEntity.setProperty("upper-case", upper);
+    taskEntity.setProperty("sort", sortInput);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(taskEntity);
+
+    response.sendRedirect("/index.html");
   }
 
 
