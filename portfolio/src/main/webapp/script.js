@@ -33,7 +33,30 @@ function getHelloUsingArrowFunctions() {
   });
 }
 
+function getServerStats() {
+  fetch('/data').then(response => response.json()).then((message) => {
+    // stats is an object, not a string, so we have to
+    // reference its fields to create HTML content
 
+    const statsListElement = document.getElementById('message-container');
+    statsListElement.innerHTML = '';
+    statsListElement.appendChild(
+        createListElement('Start time: ' + message.firstWord));
+    statsListElement.appendChild(
+        createListElement('Current time: ' + message.secondWord));
+    statsListElement.appendChild(
+        createListElement('Max memory: ' + message.thirdWord));
+    statsListElement.appendChild(
+        createListElement('Used memory: ' + message.fourthWord));
+  });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
 
 var slideIndex = 1;
 showSlides(slideIndex);
