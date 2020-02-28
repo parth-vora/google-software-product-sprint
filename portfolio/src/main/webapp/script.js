@@ -27,6 +27,14 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
 
+function getHelloUsingArrowFunctions() {
+  fetch('/data').then(response => response.text()).then((data) => {
+    document.getElementById('hello-container').innerText = data;
+  });
+}
+
+
+
 var slideIndex = 1;
 showSlides(slideIndex);
 
