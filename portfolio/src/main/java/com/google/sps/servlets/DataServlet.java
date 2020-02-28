@@ -17,6 +17,10 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -106,4 +110,30 @@ public class DataServlet extends HttpServlet {
     json += "}";
     return json;
   }
+  
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Query query = new Query("Task").addSort("text-input", SortDirection.DESCENDING);
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        PreparedQuery results = datastore.prepare(query);
+
+        ArrayList<String> tasks = new ArrayList<String>();
+        for (Entity entity : results.asIterable()) {
+        long id = entity.getKey().getId();
+        String idNum = "" + id + "";
+        String textInput = (String) entity.getProperty("text-input");
+    
+        tasks.add(textInput);
+        tasks.add(idNum);
+    }
+
+    Gson gson = new Gson();
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(tasks));
+  }
+
+
+
 }
