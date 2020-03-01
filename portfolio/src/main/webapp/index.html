@@ -8,6 +8,8 @@
     />
     <title>[Parth Vora] - Portfolio</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src='config.js'></script>
     <script src="script.js"></script>
   </head>
 
@@ -89,6 +91,14 @@
               </div>
             </div>
           </div>
+
+          <div class="card">
+            <h2>Countries I want to visit in numerical order</h2>
+            <div
+              id="geochart-colors"
+              style="width: 950px; height: 550px;"
+            ></div>
+          </div>
         </div>
 
         <div class="rightcolumn">
@@ -98,8 +108,8 @@
             </button>
             <br />
             <br />
-            <br />
             <div id="greeting-container"></div>
+            <p>------------------------------------------------------</p>
 
             <form action="/text" method="POST">
               <p>Enter some words you like (seperated by commas)</p>
@@ -140,11 +150,19 @@
 
           <div class="card">
             <h3>Hidden Talents</h3>
+
             <ul>
               <li>I can speak Mandarin, Gujarati, and of course, English</li>
               <li>I can play the piano and percussion</li>
               <li>Not really a talent, but I am left-handed</li>
             </ul>
+          </div>
+
+          <div class="card">
+            <h3>
+              Get to know me by getting to know what I do in a regular week
+            </h3>
+            <div class="chart" id="chart-container"></div>
           </div>
 
           <div class="card">

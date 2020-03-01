@@ -287,3 +287,7 @@ body {
   resize: none;
   width: 100%;
 }
+
+.chart {
+  width: 15%;
+}
