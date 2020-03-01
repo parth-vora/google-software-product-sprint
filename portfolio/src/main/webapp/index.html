@@ -1,18 +1,248 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Aclonica"
+      rel="stylesheet"
+    />
+    <title>[Parth Vora] - Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
   </head>
+
   <body>
     <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <div class="header">
+        <a href="#default" class="logo">Parth Vora</a>
+        <div class="header-right"></div>
+      </div>
+
+      <div class="row">
+        <div class="leftcolumn">
+          <div class="card">
+            <h2>What makes me, me?</h2>
+            <br />
+            <img class="img" src="/images/jc.jpg" />
+            <br />
+            <br />
+            <p>
+              Hello. My name is Parth Vora. I am currently a sophomore studying
+              at Rutgers University in New Jersey. I am a first generation
+              student studying Electrical and Computer Engineering (ECE) and
+              Computer Science (CS). I grew up in Jersey City, NJ which has been
+              the number one most diverse city in the US for several years in a
+              row. It is also the city that technically owns the Statue of
+              Liberty. I attended McNair Academic High School - a public school
+              with a private school dress code. Being exposed to this level of
+              diversity and professionalism throughout my life, has severly
+              impacted who I am and who I surround myself around.
+            </p>
+            <p>
+              Throughout high school, I was involved in several
+              extracurriculars- including teaching students using Google CS
+              First, volunteering at the Liberty Science Center, and working
+              with our school's chapter of the National Honor Society to help
+              out with community events. I am glad that I was able to give back
+              to my community when I had the chance.
+            </p>
+            <p>
+              After high school, I was unsure about whether I wanted to pursue a
+              career in computer science or business. Computer science - I was
+              interested in but scared to pursue. Business - I hated, but it was
+              a safe option. Luckily, I was accepted into Google CSSI, where I
+              met 29 other very accomplished students with similar goals and
+              ambitions. In a short 3 weeks, we became unexpectedly close. To
+              this day, we hang out and even attend hackathons together.
+            </p>
+            <p>
+              In college, I have become an active leader in the Honors Academy
+              in the School of Engineering. I help interview prospective
+              students and run panels to answer FAQ's. I love to get involved,
+              and I'm glad Google SPS will be a step in the right direction.
+            </p>
+          </div>
+
+          <div class="card">
+            <h2>What I enjoy to photograph</h2>
+            <p>
+              I love to photograph anything that can trace back to a memory.
+              Here are some pictures I have taken.
+            </p>
+            <div class="row">
+              <div class="column">
+                <img src="/images/1.png" style="width:100%" />
+                <img src="/images/2.png" style="width:100%" />
+                <img src="/images/4.png" style="width:100%" />
+                <img src="/images/9.png" style="width:100%" />
+              </div>
+
+              <div class="column">
+                <img src="/images/3.png" style="width:100%" />
+                <img src="/images/8.png" style="width:100%" />
+              </div>
+
+              <div class="column">
+                <img src="/images/5.png" style="width:100%" />
+                <img src="/images/6.png" style="width:100%" />
+                <img src="/images/7.png" style="width:100%" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rightcolumn">
+          <div class="card">
+            <button class="button" onclick="addRandomGreeting()">
+              Click for a fun fact about me
+            </button>
+            <br />
+            <br />
+            <br />
+            <div id="greeting-container"></div>
+
+            <form action="/text" method="POST">
+              <p>Enter some words you like (seperated by commas)</p>
+              <textarea
+                class="textarea"
+                placeholder=" Ex. Broccoli, Reverie, Crisp, Whale, etc. "
+                name="text-input"
+              ></textarea>
+              <br />
+              <br />
+
+              <p>Check how you want them sorted</p>
+              <input type="checkbox" name="upper-case" value="true" />
+              Upper-case
+              <br />
+              <input type="checkbox" name="sort" value="true" /> Alphabetize
+              <br />
+              <br />
+
+              <input type="submit" />
+            </form>
+          </div>
+
+          <div class="card">
+            <h3>Past Projects</h3>
+            <ul>
+              <li>
+                <a href="http://clarity-support.appspot.com/">Clarity</a> a site
+                for self esteem.
+              </li>
+              <li>Automatic Fire Extinguisher using Arduino</li>
+              <li>
+                Staying Awake with Computer Vision - A preventative measure
+                against drowsy driving
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Hidden Talents</h3>
+            <ul>
+              <li>I can speak Mandarin, Gujarati, and of course, English</li>
+              <li>I can play the piano and percussion</li>
+              <li>Not really a talent, but I am left-handed</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Photo Gallery</h3>
+            <div class="container">
+              <div class="mySlides">
+                <div class="numbertext">1 / 5</div>
+                <img src="/images/a.png" style="width:100%" />
+              </div>
+
+              <div class="mySlides">
+                <div class="numbertext">2 / 5</div>
+                <img src="/images/c.png" style="width:100%" />
+              </div>
+
+              <div class="mySlides">
+                <div class="numbertext">3 / 5</div>
+                <img src="/images/d.png" style="width:100%" />
+              </div>
+
+              <div class="mySlides">
+                <div class="numbertext">4 / 5</div>
+                <img src="/images/e.png" style="width:100%" />
+              </div>
+
+              <div class="mySlides">
+                <div class="numbertext">5 / 5</div>
+                <img src="/images/f.png" style="width:100%" />
+              </div>
+
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+              <div class="caption-container">
+                <p id="caption"></p>
+              </div>
+
+              <div class="row">
+                <div class="column">
+                  <img
+                    class="demo cursor"
+                    src="/images/a.png"
+                    style="width:100%"
+                    onclick="currentSlide(1)"
+                    alt="Meet Milo"
+                  />
+                </div>
+                <div class="column">
+                  <img
+                    class="demo cursor"
+                    src="/images/c.png"
+                    style="width:100%"
+                    onclick="currentSlide(3)"
+                    alt="Escape Room w/ Friends"
+                  />
+                </div>
+                <div class="column">
+                  <img
+                    class="demo cursor"
+                    src="/images/d.png"
+                    style="width:100%"
+                    onclick="currentSlide(4)"
+                    alt="CSSI Reunion"
+                  />
+                </div>
+                <div class="column">
+                  <img
+                    class="demo cursor"
+                    src="/images/e.png"
+                    style="width:100%"
+                    onclick="currentSlide(5)"
+                    alt="Google NYC"
+                  />
+                </div>
+                <div class="column">
+                  <img
+                    class="demo cursor"
+                    src="/images/f.png"
+                    style="width:100%"
+                    onclick="currentSlide(6)"
+                    alt="Family"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Network with Me</h3>
+            <a href="https://www.linkedin.com/in/parthvoranj/">
+              <img class="img2" src="/images/linked.png"/><a>
+                <a href="https://github.com/parth-vora"
+                  ><img class="img2" src="/images/github.png"
+                /></a> </a
+            ></a>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
