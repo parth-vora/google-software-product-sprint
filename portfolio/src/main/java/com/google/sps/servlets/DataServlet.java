@@ -21,11 +21,10 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import com.google.gson.Gson;
-import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,18 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/text")
 public class DataServlet extends HttpServlet {
-
-  @Override
-  //public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
-    //response.setContentType("text/html;");
-    //response.getWriter().println("Hello Parth!");
-
-    //response.setContentType("application/json;");
-    //response.getWriter().println(json);
-    
-//   } 
-
+  
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     String text = getParameter(request, "text-input", "");
@@ -69,15 +57,10 @@ public class DataServlet extends HttpServlet {
     response.setContentType("text/html;");
     response.getWriter().println(Arrays.toString(words));
 
-    String input = request.getParameter("text-input");
-    String upper = request.getParameter("upper-case");
-    String sortInput = request.getParameter("sort");
-
-
     Entity taskEntity = new Entity("Task");
-    taskEntity.setProperty("text-input", input);
-    taskEntity.setProperty("upper-case", upper);
-    taskEntity.setProperty("sort", sortInput);
+    taskEntity.setProperty("text-input", text);
+    taskEntity.setProperty("upper-case", upperCase);
+    taskEntity.setProperty("sort", sort);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
@@ -85,47 +68,31 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect("/index.html");
   }
 
-
-    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     if (value == null) {
       return defaultValue;
     }
     return value;
   }
-  
-    private String convertToJson(ArrayList hello) {
-    String json = "{";
-    json += "\"firstWord\": ";
-    json += "\"" + hello.get(0) + "\"";
-    json += ", ";
-    json += "\"secondWord\": ";
-    json += "\"" + hello.get(1) + "\"";
-    json += ", ";
-    json += "\"thirdWord\": ";
-    json += hello.get(2);
-    json += ", ";
-    json += "\"fourthWord\": ";
-    json += hello.get(3);
-    json += "}";
-    return json;
-  }
-  
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Query query = new Query("Task").addSort("text-input", SortDirection.DESCENDING);
 
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        PreparedQuery results = datastore.prepare(query);
 
-        ArrayList<String> tasks = new ArrayList<String>();
-        for (Entity entity : results.asIterable()) {
-        long id = entity.getKey().getId();
-        String idNum = "" + id + "";
-        String textInput = (String) entity.getProperty("text-input");
-    
-        tasks.add(textInput);
-        tasks.add(idNum);
+
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Task").addSort("text-input", SortDirection.DESCENDING);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    ArrayList<String> tasks = new ArrayList<String>();
+    for (Entity entity : results.asIterable()) {
+      long id = entity.getKey().getId();
+      String idNum = "" + id + "";
+      String textInput = (String) entity.getProperty("text-input");
+
+      tasks.add(textInput);
+      tasks.add(idNum);
     }
 
     Gson gson = new Gson();
@@ -133,7 +100,4 @@ public class DataServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(tasks));
   }
-
-
-
 }

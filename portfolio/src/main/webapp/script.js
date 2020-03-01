@@ -16,44 +16,29 @@
  * Adds a random greeting to the page.
  */
 function addRandomGreeting() {
-  const greetings =
-      ['I live in New Jersey',"I am 20 years old", "My school had prom on the Today Show","I have an American Eskimo dog","I have worked at a TedTalk before","I was part of Google CSSI two years ago","I currently work at the biggest tissue/skin graft company", "I can speak Mandarin"];
+  const greetings = [
+    "I live in New Jersey",
+    "I am 20 years old",
+    "My school had prom on the Today Show",
+    "I have an American Eskimo dog",
+    "I have worked at a TedTalk before",
+    "I was part of Google CSSI two years ago",
+    "I currently work at the biggest tissue/skin graft company",
+    "I can speak Mandarin"
+  ];
 
   // Pick a random greeting.
   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
 
   // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
+  const greetingContainer = document.getElementById("greeting-container");
   greetingContainer.innerText = greeting;
 }
 
-function getHelloUsingArrowFunctions() {
-  fetch('/data').then(response => response.text()).then((data) => {
-    document.getElementById('hello-container').innerText = data;
-  });
-}
-
-function getServerStats() {
-  fetch('/data').then(response => response.json()).then((message) => {
-    // stats is an object, not a string, so we have to
-    // reference its fields to create HTML content
-
-    const statsListElement = document.getElementById('message-container');
-    statsListElement.innerHTML = '';
-    statsListElement.appendChild(
-        createListElement('Start time: ' + message.firstWord));
-    statsListElement.appendChild(
-        createListElement('Current time: ' + message.secondWord));
-    statsListElement.appendChild(
-        createListElement('Max memory: ' + message.thirdWord));
-    statsListElement.appendChild(
-        createListElement('Used memory: ' + message.fourthWord));
-  });
-}
 
 /** Creates an <li> element containing text. */
 function createListElement(text) {
-  const liElement = document.createElement('li');
+  const liElement = document.createElement("li");
   liElement.innerText = text;
   return liElement;
 }
@@ -63,12 +48,12 @@ showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+  showSlides((slideIndex += n));
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+  showSlides((slideIndex = n));
 }
 
 function showSlides(n) {
@@ -76,15 +61,19 @@ function showSlides(n) {
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("demo");
   var captionText = document.getElementById("caption");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  captionText.innerHTML = dots[slideIndex-1].alt;
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].className += " active";
+  captionText.innerHTML = dots[slideIndex - 1].alt;
 }
