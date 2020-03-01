@@ -33,7 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/text")
 public class DataServlet extends HttpServlet {
-  
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Get the input from the form.
     String text = getParameter(request, "text-input", "");
@@ -76,8 +75,6 @@ public class DataServlet extends HttpServlet {
     return value;
   }
 
-
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Task").addSort("text-input", SortDirection.DESCENDING);
@@ -88,7 +85,7 @@ public class DataServlet extends HttpServlet {
     ArrayList<String> tasks = new ArrayList<String>();
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
-      String idNum = "" + id + "";
+      String idNum = String.valueOf(id);
       String textInput = (String) entity.getProperty("text-input");
 
       tasks.add(textInput);
